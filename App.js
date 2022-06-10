@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, TouchableOpacity } from 'react-native';
+import { Image, TouchableOpacity, StatusBar } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 
@@ -23,6 +23,7 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <NavigationContainer theme={theme}>
+      <StatusBar barStyle="dark-content" />
       <Stack.Navigator
         initialRouteName={'Main'}
       >
@@ -66,8 +67,9 @@ const App = () => {
           component={Tabs}
           options={{
             title: null,
+            headerShown: false,
             headerStyle: {
-              backgroundColor: COLORS.lightGray
+              backgroundColor: COLORS.white,
             },
             // headerLeft: ({ onPress }) => (
             //   <TouchableOpacity

@@ -212,7 +212,36 @@ const DestinationDetail = ({ navigation }) => {
                     </Text>
                 </View>
             </View>
+
             {/* Footer */}
+            {/* <View style={{ flex: 0.5, paddingHorizontal: SIZES.padding }}>
+                <LinearGradient
+                    style={[{ height: 70, width: '100%', borderRadius: 15 }]}
+                    colors={['#edf0fc', '#d6dfff']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                >
+                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                        <View style={{ flex: 1, marginHorizontal: SIZES.padding, justifyContent: 'center' }}>
+                            <Text style={{ ...FONTS.h1 }}>$1000</Text>
+                        </View>
+
+                        <TouchableOpacity
+                            style={{ width: 130, height: '80%', marginHorizontal: SIZES.radius }}
+                            onPress={() => { console.log("Booking on pressed") }}
+                        >
+                            <LinearGradient
+                                style={[{ flex: 1, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }]}
+                                colors={['#46aeff', '#5884ff']}
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 1, y: 0 }}
+                            >
+                                <Text style={{ color: COLORS.white, ...FONTS.h2 }}>BOOKING</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                    </View>
+                </LinearGradient>
+            </View> */}
         </View>
     );
 };

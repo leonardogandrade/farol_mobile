@@ -46,32 +46,55 @@ const OptionItem = ({ bgColor, icon, label, onPress }) => {
 const Home = ({ navigation }) => {
 
     // Dummy Data
-    const [destinations, setDestinations] = React.useState([
+    const [highligh, setHighligh] = React.useState([
         {
             id: 0,
-            name: "Ski Villa",
-            img: images.skiVilla,
+            name: "Devocionais",
+            img: 'https://images.squarespace-cdn.com/content/v1/59236d8ea5790a9197367fd3/1588291632885-XRSY8SQI285NGDCNKRHR/Journeywomen-2.jpeg?format=1500w',
         },
         {
             id: 1,
-            name: "Climbing Hills",
-            img: images.climbingHills,
+            name: "Comunhão",
+            img: 'https://thumbor.guiame.com.br/unsafe/840x500/http://media.guiame.com.br/archives/2019/06/10/1447807278-banda-resgate.jpg',
         },
         {
             id: 2,
-            name: "Frozen Hills",
-            img: images.frozenHills,
+            name: "Guerra Ukrania",
+            img: 'https://static.dw.com/image/61289498_402.jpg',
         },
         {
             id: 3,
-            name: "Beach",
-            img: images.beach,
+            name: "Família",
+            img: 'https://www.leidenpsychologyblog.nl/images/uploads/_articleHeader/wedding_rings_crop.jpg',
+        },
+    ]);
+
+    const [podcast, setPodcast] = React.useState([
+        {
+            id: 0,
+            name: "John Stott",
+            img: 'https://3.bp.blogspot.com/-1-iZvpCt0p0/VVnOMLOzevI/AAAAAAAATew/98J6qsCLveM/s1600/imagem-john-stott.jpg',
+        },
+        {
+            id: 1,
+            name: "Música",
+            img: 'https://cdn.tailored-entertainment.com/images/genres/indie-rock_1603367423.jpg',
+        },
+        {
+            id: 2,
+            name: "Ciência",
+            img: 'https://media.istockphoto.com/photos/young-asian-handsome-man-scientist-adjust-focus-and-use-microscope-to-picture-id1251344090?k=20&m=1251344090&s=612x612&w=0&h=Uo-dsZldgTJjr9YuA7kamVzI7YZJ6AIrwyAGR8_l6xE=',
+        },
+        {
+            id: 3,
+            name: "Serviço social",
+            img: 'https://richmondvale.org/images/easyblog_images/115/b2ap3_large_sb-game-hacker.jpg',
         },
     ]);
 
     // Render
 
-    function renderDestinations(item, index, radius) {
+    function renderData(item, index, radius) {
         var destinationStyle = {};
 
         if (index == 0) {
@@ -84,7 +107,7 @@ const Home = ({ navigation }) => {
                 onPress={() => { navigation.navigate("ReadDetail") }}
             >
                 <Image
-                    source={item.img}
+                    source={{ uri: item.img }}
                     resizeMode="cover"
                     style={{
                         width: SIZES.width * 0.28,
@@ -101,10 +124,10 @@ const Home = ({ navigation }) => {
 
     return (
         <SafeAreaView>
-            <ScrollView style={{ flexDirection: 'column', backgroundColor: COLORS.lightGray }}>
+            <ScrollView style={{ flexDirection: 'column', backgroundColor: COLORS.white }}>
                 {/* Buttons options */}
                 <View style={{ flex: 1, justifyContent: 'center' }}>
-                    <View style={{ flexDirection: 'row', marginTop: SIZES.padding, paddingHorizontal: SIZES.base }}>
+                    <View style={{ flexDirection: 'row', marginTop: 80, paddingHorizontal: SIZES.base }}>
                         <OptionItem
                             icon={icons.bible}
                             bgColor={['#46aeff', '#5884ff']}
@@ -163,9 +186,9 @@ const Home = ({ navigation }) => {
                     <FlatList
                         horizontal
                         showsHorizontalScrollIndicator={false}
-                        data={destinations}
+                        data={highligh}
                         keyExtractor={item => item.id.toString()}
-                        renderItem={({ item, index }) => renderDestinations(item, index)}
+                        renderItem={({ item, index }) => renderData(item, index)}
                     />
                 </View>
                 <View style={{ display: 'flex', marginBottom: 0, height: 200 }}>
@@ -173,9 +196,9 @@ const Home = ({ navigation }) => {
                     <FlatList
                         horizontal
                         showsHorizontalScrollIndicator={false}
-                        data={destinations}
+                        data={podcast}
                         keyExtractor={item => item.id.toString()}
-                        renderItem={({ item, index }) => renderDestinations(item, index, 80)}
+                        renderItem={({ item, index }) => renderData(item, index, 80)}
                     />
                 </View>
             </ScrollView>

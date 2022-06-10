@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
 import { COLORS, icons } from '../constants';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatList } from 'react-native-gesture-handler';
@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         paddingRight: 5,
         borderRadius: 5,
+        marginTop: 10,
     },
     textInput: {
         width: 295,
