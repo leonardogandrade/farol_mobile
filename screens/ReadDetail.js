@@ -1,16 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     StyleSheet,
     View,
     Text,
-    SafeAreaView,
     Image,
     ScrollView,
     TouchableOpacity,
     Animated,
 } from 'react-native';
 
-import LinearGradient from 'react-native-linear-gradient';
+import api from '../service/api';
 import { images, icons, COLORS, FONTS, SIZES } from '../constants';
 import CustomPlayer from '../components/CustomPlayer';
 const StarReview = ({ rate }) => {
@@ -101,9 +100,23 @@ const headerScrollHeight = scrollOffsetY.interpolate({
 });
 
 const ReadDetail = ({ navigation }) => {
+    const [devotional, setDevotional] = useState('');
 
-    // Render
-
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                let date = new Date();
+                const cur_month = date.getMonth() + 1
+                const month = cur_month.toString().padStart(2, '0');
+                const current_date = `${date.getFullYear()}-${month}-${date.getDate()}`;
+                const result = await api.get(`/devotional/${current_date}`);
+                setDevotional(result.data);
+            } catch (err) {
+                console.log(`ERROR: ${err}`);
+            }
+        };
+        getData();
+    }, []);
     return (
         <View style={{ flex: 1 }}>
             <ScrollView
@@ -147,39 +160,15 @@ const ReadDetail = ({ navigation }) => {
                         <View style={{ marginTop: SIZES.padding, paddingHorizontal: SIZES.padding }}>
                             <Text style={{ ...FONTS.h2, color: COLORS.black }}>Meditação</Text>
                             <Text style={{ marginTop: SIZES.radius, color: COLORS.gray, ...FONTS.body3, textAlign: 'justify' }}>
-                                Is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-                                it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-                                typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-                                sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                                including versions of Lorem Ipsum.
-                                {'\n'}
-                                {'\n'}
-                                Is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-                                it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-                                typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-                                sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                                including versions of Lorem Ipsum.
-                                {'\n'}
-                                {'\n'}
-                                Is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-                                it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-                                typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-                                sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                                including versions of Lorem Ipsum.
+                                {devotional.meditation?.replace(/[.*]\n/g, '\n\n')}
                             </Text>
                             <Text style={{ ...FONTS.h2, color: COLORS.black, marginTop: SIZES.radius }}>Aplicação</Text>
                             <Text style={{ marginTop: SIZES.radius, color: COLORS.gray, ...FONTS.body3, textAlign: 'justify' }}>
-                                Is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-                                it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.
+                                {devotional.application?.replace(/[.*]\n/g, '\n\n')}
                             </Text>
                             <Text style={{ ...FONTS.h2, color: COLORS.black, marginTop: SIZES.radius }}>Oração</Text>
                             <Text style={{ marginTop: SIZES.radius, color: COLORS.gray, ...FONTS.body3, textAlign: 'justify' }}>
-                                Is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                standard dummy text ever since the 1500s.
+                                {devotional.pray?.replace(/[.*]\n/g, '\n\n')}
                             </Text>
                             <Text></Text>
                         </View>
